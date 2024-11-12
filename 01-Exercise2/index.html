@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VueJS Workshopt 1 - Playground</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Movie Characters</h1>
+      <ul v-if="movies.length > 0">
+        <li v-for="movie in movies">
+          <div>
+            <h2>{{ movie.title }}</h2>
+            <button v-on:click="() => addToFavorites(movie)">Favorite!</button>
+          </div>
+          <ul>
+            <li v-for="character in movie.characters">{{ character }}</li>
+          </ul>
+        </li>
+      </ul>
+      <p v-else>No movies available</p>
+      <h2>Favorite Movies</h2>
+      <ul v-if="favoriteMovies.length > 0">
+        <li v-for="movie in favoriteMovies">
+          <p>{{ movie.title }}</p>
+          <button v-on:click="() => removeFromFavorites(movie)">Remove</button>
+        </li>
+      </ul>
+      <p v-else>No favorites yet</p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+      const app = createApp({
+        data() {
+          return {
+            favoriteMovies: [],
+            movies: [
+              { title: "Inception", characters: ["Cobb", "Ariadne", "Mal"] },
+              {
+                title: "The Dark Knight",
+                characters: ["Batman", "Joker", "Bane"],
+              },
+              {
+                title: "Interstellar",
+                characters: ["Cooper", "Murph", "Brand"],
+              },
+              {
+                title: "The Prestige",
+                characters: ["Angier", "Borden", "Olivia"],
+              },
+            ],
+          };
+        },
+        methods: {
+          addToFavorites(movie) {
+            this.favoriteMovies.push(movie);
+          },
+          removeFromFavorites(movie) {
+            this.favoriteMovies = this.favoriteMovies.filter(
+              (favoriteMovie) => favoriteMovie.title !== movie.title
+            );
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
