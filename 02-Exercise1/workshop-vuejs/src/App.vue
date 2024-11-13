@@ -21,41 +21,36 @@
   </ul>
   <p v-else>No favorites yet</p>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      favoriteMovies: [],
-      movies: [
-        {
-          id: '963df132-5b53-41ce-9459-c9be81a48022',
-          title: 'Inception',
-          characters: ['Cobb', 'Ariadne', 'Mal']
-        },
-        {
-          title: 'The Dark Knight',
-          characters: ['Batman', 'Joker', 'Bane']
-        },
-        {
-          id: '46994b96-5b9d-4669-8660-f020b1442a9b',
-          title: 'Interstellar',
-          characters: ['Cooper', 'Murph', 'Brand']
-        },
-        {
-          id: '0ccec8e3-ff20-4e9a-8b7b-5d27cd28afd9',
-          title: 'The Prestige',
-          characters: ['Angier', 'Borden', 'Olivia']
-        }
-      ]
-    }
+<script setup>
+import { ref } from 'vue'
+const favoriteMovies = ref([])
+const movies = ref([
+  {
+    id: '963df132-5b53-41ce-9459-c9be81a48022',
+    title: 'Inception',
+    characters: ['Cobb', 'Ariadne', 'Mal']
   },
-  methods: {
-    addToFavorites(movie) {
-      this.favoriteMovies.push(movie)
-    },
-    removeFromFavorites(movie) {
-      this.favoriteMovies = this.favoriteMovies.filter(favMovie => favMovie.id !== movie.id)
-    }
+  {
+    title: 'The Dark Knight',
+    characters: ['Batman', 'Joker', 'Bane']
+  },
+  {
+    id: '46994b96-5b9d-4669-8660-f020b1442a9b',
+    title: 'Interstellar',
+    characters: ['Cooper', 'Murph', 'Brand']
+  },
+  {
+    id: '0ccec8e3-ff20-4e9a-8b7b-5d27cd28afd9',
+    title: 'The Prestige',
+    characters: ['Angier', 'Borden', 'Olivia']
   }
+])
+function addToFavorites(movie) {
+  favoriteMovies.value.push(movie)
 }
+
+function removeFromFavorites(movie) {
+  favoriteMovies.value = favoriteMovies.value.filter(favMovie => favMovie.id !== movie.id)
+}
+
 </script>
