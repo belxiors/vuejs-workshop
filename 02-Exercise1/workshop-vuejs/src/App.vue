@@ -48,7 +48,8 @@ export default {
         }
       ]
     }
-  }, methods: {
+  }, 
+  methods: {
     addToFavorites(movie) {
       this.favoriteMovies.push(movie)
     },
